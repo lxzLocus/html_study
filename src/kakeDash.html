@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>家計簿ダッシュボード</title>
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+            background: #f9fafb;
+            margin: 0;
+            padding: 2rem;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ========== Table ========== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background-color: #f3f4f6;
+            text-align: left;
+        }
+
+        tr:hover {
+            background-color: #eef2ff;
+            cursor: pointer;
+        }
+
+        /* ========== Modal ========== */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+        }
+
+        .modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            width: 320px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            border: none;
+            background: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content p {
+            margin: 0.5rem 0;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+
+        .actions button {
+            flex: 1;
+            margin: 0 4px;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background-color: #2563eb;
+            color: #fff;
+        }
+
+        .delete-btn {
+            background-color: #dc2626;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>取引履歴</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>日付</th>
+                <th>金額</th>
+                <th>タイプ</th>
+                <th>カテゴリ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-date="2025-02-01" data-amount="10000" data-type="支出" data-category="食費">
+                <td>2025-02-01</td>
+                <td>¥10,000</td>
+                <td>支出</td>
+                <td>食費</td>
+            </tr>
+            <tr data-date="2025-02-03" data-amount="230000" data-type="収入" data-category="給料">
+                <td>2025-02-03</td>
+                <td>¥230,000</td>
+                <td>収入</td>
+                <td>給料</td>
+            </tr>
+            <tr data-date="2025-02-06" data-amount="4200" data-type="支出" data-category="交通費">
+                <td>2025-02-06</td>
+                <td>¥4,200</td>
+                <td>支出</td>
+                <td>交通費</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ======== モーダル ======== -->
+    <div class="modal" id="record-modal">
+        <div class="modal-content">
+            <button class="close-btn" aria-label="閉じる">&times;</button>
+            <h2>取引詳細</h2>
+            <p><strong>日付:</strong> <span id="detail-date"></span></p>
+            <p><strong>金額:</strong> ¥<span id="detail-amount"></span></p>
+            <p><strong>種類:</strong> <span id="detail-type"></span></p>
+            <p><strong>カテゴリ:</strong> <span id="detail-category"></span></p>
+
+            <div class="actions">
+                <button class="edit-btn">編集</button>
+                <button class="delete-btn">削除</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const rows = document.querySelectorAll("tbody tr");
+        const modal = document.getElementById("record-modal");
+        const closeBtn = modal.querySelector(".close-btn");
+
+        // 詳細表示の要素参照
+        const detailDate = document.getElementById("detail-date");
+        const detailAmount = document.getElementById("detail-amount");
+        const detailType = document.getElementById("detail-type");
+        const detailCategory = document.getElementById("detail-category");
+
+        // 各テーブル行クリック時にモーダルを表示
+        rows.forEach((row) => {
+            row.addEventListener("click", () => {
+                const date = row.dataset.date;
+                const amount = row.dataset.amount;
+                const type = row.dataset.type;
+                const category = row.dataset.category;
+
+                // モーダル情報に反映
+                detailDate.textContent = date;
+                detailAmount.textContent = amount;
+                detailType.textContent = type;
+                detailCategory.textContent = category;
+
+                // モーダルを表示
+                modal.classList.add("active");
+            });
+        });
+
+        // 閉じるボタンでモーダルを非表示
+        closeBtn.addEventListener("click", () => {
+            modal.classList.remove("active");
+        });
+
+        // 背景クリックでも閉じる
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) modal.classList.remove("active");
+        });
+    </script>
+</body>
+
+</html>
