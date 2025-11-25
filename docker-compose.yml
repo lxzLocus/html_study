@@ -1,0 +1,15 @@
+services:
+  training:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: training
+    # restart: always
+    tty: true
+    ports:
+      - "3001:3000"
+    volumes:
+      - /app/node_modules # ←追加
+      - type: bind
+        source: ./
+        target: /app

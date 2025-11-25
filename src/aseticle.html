@@ -1,0 +1,100 @@
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASEticle</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50">
+    <header class="bg-white p-4 shadow">
+        <div class="flex items-center justify-between">
+            <!--ロゴ -->
+            <h1>ASEticle</h1>
+
+            <!--検索フォーム-->
+            <form action="" class="flex items-center gap-2">
+                <input type="text" name="q"placeholder="Search..." class="border rounded-md px-4 py-2 w-64">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Search</button>
+            </form>
+
+            <!--設定やモード -->
+            <div class="flex items-center gap-2">
+                <label>Dark Mode</label>
+                <input type="checkbox" name="dark-mode">
+            </div>
+        
+        </div>
+    </header>
+
+    <!-- ② メインエリア -->
+    <main class="max-w-screen-xl mx-auto p-6">
+        <!-- 全体を左右に分ける -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- サイドバー -->
+            <aside class="lg:col-span-1 p-4 rounded-xl shadow">
+                    <h2 class="text-lg font-semibold mb-3">Filter Conference</h2>
+                    <ul class="flex flex-col gap-2 text-gray-700">
+                        <li><label class="flex gap-2 items-center"><input type="checkbox" /> ACM</label></li>
+                        <li><label class="flex gap-2 items-center"><input type="checkbox" /> Arxiv</label></li>
+                        <li><label class="flex gap-2 items-center"><input type="checkbox" /> IEEE</label></li>
+                    </ul>
+
+                <div>
+                    <h2 class="text-lg font-semibold mb-3">Filter Post Date</h2>
+                    <select class="w-full border rounded-md p-2">
+                        <option>Any time</option>
+                        <option>Past year</option>
+                        <option>Past 5 years</option>
+                    </select>
+                </div>
+
+                <div>
+                    <h2 class="text-lg font-semibold mb-3">Sort By</h2>
+                    <select class="w-full border rounded-md p-2">
+                        <option>Cited</option>
+                        <option>Date</option>
+                    </select>
+                </div>
+
+                <div>
+                    <h2 class="text-lg font-semibold mb-3">Sort Type</h2>
+                    <select class="w-full border rounded-md p-2">
+                        <option>Ascending</option>
+                        <option>Descending</option>
+                    </select>
+                </div>
+            </aside>
+
+            <!-- 検索結果表示 -->
+            <section class="lg:col-span-3 bg-white p-6 rounded-xl shadow flex flex-col gap-4">
+                <h2 class="text-xl font-semibold mb-2">Search Results for "LLM"</h2>
+                <p class="text-sm text-gray-600 mb-4">Content Items: 42</p>
+
+                <!-- 各検索結果カード -->
+                <article class="border p-4 rounded-md shadow-sm hover:shadow transition">
+                    <h3 class="text-lg font-semibold text-blue-600 mb-2">
+                        Data-efficient Fine-tuning for LLM-based Recommendation
+                    </h3>
+                    <p class="text-gray-700 text-sm leading-relaxed mb-2">
+                        Leveraging large language models (LLMs) for recommendation has recently
+                        garnered considerable attention...
+                    </p>
+                    <p class="text-xs text-gray-500">ACM | 240711 | Submitted: Yes</p>
+                </article>
+
+                <article class="border p-4 rounded-md shadow-sm hover:shadow transition">
+                    <h3 class="text-lg font-semibold text-blue-600 mb-2">
+                        Why Johnny Can't Prompt: How Non-AI Experts Try...
+                    </h3>
+                    <p class="text-gray-700 text-sm leading-relaxed mb-2">
+                        Pre-trained large language models (LLMs) can engage in multi-turn ...
+                    </p>
+                    <p class="text-xs text-gray-500">ACM | 230412 | Submitted: Yes</p>
+                </article>
+            </section>
+        </div>
+    </main>
+
+</body> 

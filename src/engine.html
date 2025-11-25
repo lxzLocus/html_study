@@ -1,0 +1,48 @@
+<html lang="jp">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Google風ページ</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+
+
+    <body>
+        <header class="flex justify-between items-center bg-gray-100 p-4">
+            <!--左上-->
+            <div class="flex items-center gap-4">
+                <a href="">googleについて</a>
+                <a href="">ストア</a>
+            </div>
+
+            <!--右上-->
+            <div class="flex items-center gap-4">
+                <a href="">Gmail</a>
+                <a href="">画像</a>
+                <a href="">Lab Icon</a>
+                <a href="">Grid Menu</a>
+                <a href="">User Icon</a>
+            </div>
+        </header>
+
+        <main class="flex flex-col items-center mt-32 gap-8">
+            <!--ロゴ画像-->
+            <h1 class="text-6xl font-bold">Google</h1>
+
+            <form class="flex flex-col items-center gap-4">
+                <!-- 検索入力 -->
+                <input type="text" name="q" placeholder="Search..." class="border border-gray-300 rounded-lg px-4 py-2 w-96" />
+
+                <!-- ボタン群 -->
+                <div class="flex gap-3 justify-center">
+                    <button type="submit" class="bg-gray-200 px-4 py-2 rounded">
+                        Google 検索
+                    </button>
+                    <button type="submit" class="bg-gray-200 px-4 py-2 rounded">
+                        I'm Feeling Lucky
+                    </button>
+                </div>
+            </form>
+        </main>
+    </body>
+</html>

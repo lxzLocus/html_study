@@ -1,0 +1,12 @@
+FROM node:22.4-alpine
+
+WORKDIR /app
+
+COPY package*.json .
+
+
+COPY . .
+
+#Add git command
+RUN apk update && apk add --no-cache git
+RUN apk add sudo
